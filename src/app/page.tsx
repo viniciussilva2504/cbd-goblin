@@ -34,7 +34,7 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="relative flex min-h-[90vh] items-center overflow-hidden bg-sage-900">
-        <div className="absolute inset-0 from-sage-700 via-sage-900 to-charcoal-900 opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-sage-700 via-sage-900 to-charcoal-900 opacity-80" />
         <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             <span className="mb-4 inline-block rounded-full border border-gold-400/40 bg-gold-400/10 px-4 py-1 text-sm font-medium text-gold-300">
