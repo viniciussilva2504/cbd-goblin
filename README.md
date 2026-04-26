@@ -2,17 +2,17 @@
 
 # 🍃 CBD Goblin
 
-**E-commerce fullstack de produtos CBD/HHC — loja física em Vila Nova de Gaia, Portugal**
+**E-commerce fullstack de produtos CBD/HHC — Vila Nova de Gaia, Portugal**
 
-[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org)
+[![Next.js](https://img.shields.io/badge/Next.js-16.2-black?style=flat-square&logo=next.js)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-06b6d4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ecf8e?style=flat-square&logo=supabase&logoColor=white)](https://supabase.com)
-[![Stripe](https://img.shields.io/badge/Stripe-Payments-635bff?style=flat-square&logo=stripe&logoColor=white)](https://stripe.com)
+[![Stripe](https://img.shields.io/badge/Stripe-Checkout-635bff?style=flat-square&logo=stripe&logoColor=white)](https://stripe.com)
 [![Zustand](https://img.shields.io/badge/Zustand-5-orange?style=flat-square)](https://zustand-demo.pmnd.rs)
-[![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?style=flat-square&logo=vercel)](https://vercel.com)
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-black?style=flat-square&logo=vercel)](https://cbd-goblin-git-main-vinicius-silvas-projects-6f23ba6d.vercel.app)
 
-[🛍️ Demo (em breve)](#) · [📖 Supabase](#supabase-integration) · [🖼 Screenshots](#screenshots)
+[🛍️ Demo ao vivo](https://cbd-goblin-git-main-vinicius-silvas-projects-6f23ba6d.vercel.app) · [📖 Supabase](#supabase-integration) · [🖼 Screenshots](#screenshots)
 
 </div>
 
@@ -20,19 +20,19 @@
 
 ## Sobre o Projeto
 
-**CBD Goblin** é uma loja especializada em produtos CBD sediada em **Vila d'Este, Vila Nova de Gaia**. Este repositório contém o e-commerce completo — desde a landing page ao checkout com Stripe — desenvolvido com Next.js 16 App Router com foco em SEO, performance e experiência do utilizador.
+**CBD Goblin** é o e-commerce oficial de uma loja física especializada em produtos CBD, sediada em **Vila d'Este, Vila Nova de Gaia**. O projeto cobre o fluxo completo — catálogo com filtros, carrinho persistente, checkout via Stripe Checkout Session e confirmação de pagamento — implementado com **Next.js 16 App Router**, priorizando Server Components, SEO técnico e performance.
 
-> Desenvolvido como parte do portfólio técnico de um desenvolvedor fullstack, demonstrando integração end-to-end com Next.js App Router, Supabase, Stripe e deploy no Vercel.
+Projeto de portfólio fullstack com integração real de Supabase (schema + RLS), Stripe (server-side pricing, sem preços vindos do cliente) e deploy contínuo no Vercel via GitHub.
 
-### Posicionamento Editorial
+### Abordagem Editorial
 
-O site aborda o CBD de forma educativa e responsável: secção de livros científicos, testemunhos de utilizadores com acompanhamento médico e uma página de **Redução de Danos** para consumidores que optam por inalação — promovendo acessórios seguros (vaporizadores, bongs, piteiras de vidro) sobre o consumo sem filtro.
+O conteúdo do site trata o CBD de forma informativa e responsável: referências bibliográficas científicas, testemunhos com contexto terapêutico e uma página de **Redução de Danos** com tabela comparativa de riscos por método de consumo — posicionando acessórios seguros (vaporizadores, filtros, piteiras de vidro) como alternativas ao consumo sem proteção.
 
 ---
 
 ## Screenshots
 
-> Gerados com `npm run screenshots` — ver [Script de Screenshots](#script-de-screenshots)
+> Gerados automaticamente com Playwright via `npm run screenshots` — ver [Script de Screenshots](#script-de-screenshots)
 
 | Homepage (Desktop) | Redução de Danos |
 |---|---|
@@ -64,7 +64,7 @@ O site aborda o CBD de forma educativa e responsável: secção de livros cient�
 
 | Camada | Tecnologia | Porquê |
 |--------|-----------|--------|
-| Framework | **Next.js 16 App Router** | RSC, file-based routing, API routes, Image optimization |
+| Framework | **Next.js 16.2 App Router** | RSC, file-based routing, API routes, `next/image` optimization |
 | UI | **React 19 + TypeScript 5** | Componentes fortemente tipados |
 | Estilo | **Tailwind CSS v4** | Design system com tokens custom via `@theme` |
 | Estado | **Zustand 5** | Carrinho client-side com middleware `persist` |
@@ -165,8 +165,8 @@ npm run dev
 # 3. Capturar (outra terminal)
 npm run screenshots
 
-# Para produção/staging:
-SCREENSHOT_URL=https://cbd-goblin.vercel.app npm run screenshots
+# Para produção:
+SCREENSHOT_URL=https://cbd-goblin-git-main-vinicius-silvas-projects-6f23ba6d.vercel.app npm run screenshots
 ```
 
 Os prints são gravados em `public/screenshots/` + `manifest.json` com timestamp.
@@ -234,13 +234,16 @@ npm run screenshots   # Capturar screenshots automáticos
 
 ## Deploy
 
-Push para `main` → deploy automático no Vercel.
+Push para `main` → deploy automático no Vercel via integração GitHub.
 
-1. Adicionar variáveis de ambiente no dashboard Vercel
-2. Configurar webhook Stripe:
+**Passos pós-deploy:**
+
+1. Adicionar todas as variáveis de ambiente no dashboard do Vercel (ver secção [Variáveis de Ambiente](#variáveis-de-ambiente))
+2. Configurar o webhook Stripe apontando para:
    ```
-   https://cbd-goblin.vercel.app/api/stripe/webhook
+   https://cbd-goblin-git-main-vinicius-silvas-projects-6f23ba6d.vercel.app/api/stripe/webhook
    ```
+3. No Stripe Dashboard → Webhooks → selecionar evento `checkout.session.completed`
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/viniciussilva2504/cbd-goblin)
 
@@ -272,5 +275,5 @@ Push para `main` → deploy automático no Vercel.
 
 ---
 
-> Todos os produtos CBD e HHC comercializados cumprem a legislação portuguesa vigente (THC ≤ 0.2%).  
-> Este e-commerce é um projeto de portfólio — os produtos são ficcionais durante a fase de desenvolvimento.
+> Todos os produtos CBD e HHC cumprem a legislação portuguesa vigente (THC ≤ 0.2%, Decreto-Lei n.º 8/2019).  
+> O catálogo atual utiliza dados mock para efeitos de demonstração — integração real com Supabase prevista para Julho 2026.
