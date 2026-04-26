@@ -25,25 +25,13 @@ export default function Navbar() {
           href="/"
           className="flex items-center gap-2 font-display text-xl font-bold text-sage-700 transition-opacity hover:opacity-80"
         >
-          {/* Goblin silhouette — minimalist filled icon */}
-          <svg
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="h-6 w-6 text-sage-600"
-            aria-hidden
-          >
-            {/* Pointed hat */}
-            <path d="M12 2L17.5 9H6.5L12 2Z" />
-            {/* Hat brim */}
-            <path d="M6 9H18Q18.8 9 18.8 10Q18.8 11 18 11H6Q5.2 11 5.2 10Q5.2 9 6 9Z" />
-            {/* Pointy ears */}
-            <path d="M6.5 13.5L4 11.5V15.5L6.5 16Z" />
-            <path d="M17.5 13.5L20 11.5V15.5L17.5 16Z" />
-            {/* Head */}
-            <circle cx="12" cy="15" r="5" />
-            {/* Body */}
-            <path d="M7.5 21Q7 23 12 23Q17 23 16.5 21L15.5 19H8.5Z" />
-          </svg>
+          {/* Cannabis leaf logo */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://img.freepik.com/premium-vector/marijuana-leaf-clipart-cartoon-style-vector-illustration_761413-4114.jpg?semt=ais_hybrid&w=740&q=80"
+            alt="CBD Goblin leaf"
+            className="h-8 w-8 object-contain"
+          />
           <span>CBD Goblin</span>
         </Link>
 

@@ -12,8 +12,8 @@ interface Particle {
 
 const DOT_COLOR   = "rgba(134, 239, 172,"; // green-300
 const LINE_COLOR  = "rgba(134, 239, 172,";
-const MAX_DIST    = 130;
-const COUNT       = 38;
+const MAX_DIST    = 160;
+const COUNT       = 55;
 const SPEED       = 0.38;
 
 export default function ParticleWeb({ className = "" }: { className?: string }) {

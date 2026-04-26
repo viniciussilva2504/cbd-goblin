@@ -5,20 +5,23 @@
  * Requer: npm install -D playwright && npx playwright install chromium
  *
  * Uso:
- *   npm run screenshots          # captura com app já rodando em localhost:3000
- *   SCREENSHOT_URL=https://url   npm run screenshots
+ *   npm run screenshots                        # arranca o servidor automaticamente
+ *   SCREENSHOT_URL=https://url npm run screenshots  # usa URL externa (sem servidor local)
  */
 
 import { chromium } from "playwright";
 import { mkdirSync, writeFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { spawn } from "child_process";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 
-const BASE_URL = process.env.SCREENSHOT_URL ?? "http://localhost:3000";
+const EXTERNAL_URL = process.env.SCREENSHOT_URL;
+const BASE_URL = EXTERNAL_URL ?? "http://localhost:3000";
 const OUTPUT_DIR = join(ROOT, "public", "screenshots");
+const PORT = 3000;
 
 const PAGES = [
   { name: "home", path: "/" },
@@ -36,9 +39,31 @@ const VIEWPORTS = [
 ];
 
 async function waitForNetwork(page, url) {
-  await page.goto(url, { waitUntil: "networkidle", timeout: 20_000 });
+  await page.goto(url, { waitUntil: "networkidle", timeout: 30_000 });
   // Extra wait for animations to settle
   await page.waitForTimeout(600);
+}
+
+/** Verifica se localhost:PORT já está a responder */
+async function isServerUp() {
+  try {
+    const res = await fetch(`http://localhost:${PORT}`, {
+      signal: AbortSignal.timeout(2000),
+    });
+    return res.ok || res.status < 500;
+  } catch {
+    return false;
+  }
+}
+
+/** Aguarda até o servidor estar pronto (max ~60s) */
+async function waitForServer(maxMs = 60_000) {
+  const start = Date.now();
+  while (Date.now() - start < maxMs) {
+    if (await isServerUp()) return true;
+    await new Promise((r) => setTimeout(r, 1000));
+  }
+  return false;
 }
 
 async function main() {
@@ -47,6 +72,33 @@ async function main() {
   console.log(`\n📸 CBD Goblin — Screenshot Capture`);
   console.log(`   Target: ${BASE_URL}`);
   console.log(`   Output: public/screenshots/\n`);
+
+  // Se não foi fornecida URL externa, arrancar o servidor local se necessário
+  let serverProc = null;
+  if (!EXTERNAL_URL) {
+    if (await isServerUp()) {
+      console.log("   ℹ️  Servidor já está a correr em localhost:" + PORT);
+    } else {
+      console.log("   🚀 A arrancar o servidor Next.js (modo dev)...");
+      // Usa dev server — não requer build prévia
+      serverProc = spawn("npm", ["run", "dev"], {
+        cwd: ROOT,
+        shell: true,
+        stdio: "pipe",
+      });
+      serverProc.stderr.on("data", (d) => process.stderr.write(d));
+
+      const ready = await waitForServer(90_000);
+      if (!ready) {
+        serverProc.kill();
+        console.error(
+          "   ❌ Servidor não respondeu em 90s. Corre 'npm run build' primeiro.",
+        );
+        process.exit(1);
+      }
+      console.log("   ✅ Servidor pronto em localhost:" + PORT + "\n");
+    }
+  }
 
   const browser = await chromium.launch({ headless: true });
   const results = [];
@@ -89,8 +141,9 @@ async function main() {
   }
 
   await browser.close();
+  if (serverProc) serverProc.kill();
 
-  // Write manifest so README/CI can reference screenshots
+  // Escreve manifest
   const manifest = {
     captured_at: new Date().toISOString(),
     base_url: BASE_URL,

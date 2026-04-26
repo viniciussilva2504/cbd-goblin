@@ -183,26 +183,40 @@ export default function HomePage() {
     <>
       {/* ══ HERO ══════════════════════════════════════════════ */}
       <section className="relative overflow-hidden bg-forest-900">
-        {/* Background radial glow */}
+        {/* Cannabis background image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://medicinalgenomics.com/wp-content/uploads/2025/04/Increase-Cannabis-Yield-scaled.jpeg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center opacity-50"
+        />
+        {/* Dark gradient overlay — keeps text legible and geometry visible */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-forest-900/80 via-forest-900/50 to-forest-900/30" />
+        {/* Radial colour accents on top */}
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute right-1/4 top-1/4 h-96 w-96 rounded-full bg-cobalt-900/40 blur-3xl" />
-          <div className="absolute left-1/3 bottom-1/4 h-64 w-64 rounded-full bg-sage-900/60 blur-3xl" />
+          <div className="absolute right-1/4 top-1/4 h-96 w-96 rounded-full bg-cobalt-900/30 blur-3xl" />
+          <div className="absolute left-1/3 bottom-1/4 h-64 w-64 rounded-full bg-sage-900/40 blur-3xl" />
         </div>
 
         {/* Promo ticker strip */}
-        <div className="relative overflow-hidden border-b border-goblin-500/20 bg-black/40 py-2.5">
-          <div className="ticker-track" style={{ animationDuration: "20s" }}>
-            {[...PROMO_PRODUCTS, ...PROMO_PRODUCTS].map((p, i) => (
-              <span key={i} className="mx-5 whitespace-nowrap text-xs font-semibold text-goblin-300">
-                <span className="mr-5 text-goblin-500">*</span>
-                {p.name} — {p.discount}% OFF
+        <div className="relative overflow-hidden border-b border-goblin-500/20 bg-black/40 py-2">
+          <div className="ticker-track" style={{ animationDuration: "30s" }}>
+            {Array.from({ length: 6 }).map((_, i) => (
+              <span key={i} className="mx-8 whitespace-nowrap text-[11px] font-medium text-sage-400">
+                <span className="mr-4 text-goblin-500">*</span>
+                Resultados individuais.
+                <span className="mx-4 text-goblin-600">·</span>
+                O CBD não substitui tratamento médico.
+                <span className="mx-4 text-goblin-600">·</span>
+                Consulta sempre um profissional de saúde.
               </span>
             ))}
           </div>
         </div>
 
         {/* Hero text + geometry */}
-        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Left: copy */}
             <div>
@@ -247,7 +261,7 @@ export default function HomePage() {
             </div>
 
             {/* Right: geometric particle animation */}
-            <div className="hidden h-80 lg:block lg:h-96">
+            <div className="hidden lg:block" style={{ height: "520px" }}>
               <ParticleWeb />
             </div>
           </div>
@@ -424,24 +438,30 @@ export default function HomePage() {
             ))}
           </div>
 
-          <p className="mt-8 text-center text-xs text-sage-600">
+          <p className="mt-4 text-center text-xs text-sage-600">
             Resultados individuais. O CBD não substitui tratamento médico. Consulta sempre um profissional de saúde.
           </p>
         </div>
       </section>
 
-      {/* ══ NEWSLETTER ════════════════════════════════════════ */}
-      <section id="contacto" className="bg-forest-900 py-24 text-center">
+      {/* ══ NEWSLETTER ══════════════════════════════════════════════ */}
+      <section id="contacto" className="bg-white py-16 text-center">
         <div className="mx-auto max-w-xl px-4 sm:px-6">
-          <span className="mb-4 inline-block text-3xl">🌿</span>
-          <h2 className="text-3xl font-bold text-cream-50 sm:text-4xl">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="https://img.freepik.com/premium-vector/marijuana-leaf-clipart-cartoon-style-vector-illustration_761413-4114.jpg?semt=ais_hybrid&w=740&q=80"
+            alt=""
+            aria-hidden
+            className="mx-auto mb-4 h-14 w-14 object-contain"
+          />
+          <h2 className="text-3xl font-bold text-charcoal-900 sm:text-4xl">
             Novidades sem spam.
           </h2>
-          <p className="mt-3 text-sage-400">
+          <p className="mt-3 text-charcoal-500">
             Promoções, novos produtos e conteúdo sobre CBD — direto para o teu email.
           </p>
           <NewsletterForm />
-          <p className="mt-3 text-xs text-sage-600">Sem spam. Cancela quando quiseres.</p>
+          <p className="mt-3 text-xs text-charcoal-400">Sem spam. Cancela quando quiseres.</p>
         </div>
       </section>
     </>
