@@ -1,0 +1,90 @@
+{
+  "captured_at": "2026-04-26T20:13:12.196Z",
+  "base_url": "http://localhost:3000",
+  "screenshots": [
+    {
+      "page": "home",
+      "viewport": "desktop",
+      "file": "home-desktop.png",
+      "ok": true
+    },
+    {
+      "page": "produtos",
+      "viewport": "desktop",
+      "file": "produtos-desktop.png",
+      "ok": true
+    },
+    {
+      "page": "flores",
+      "viewport": "desktop",
+      "file": "flores-desktop.png",
+      "ok": true
+    },
+    {
+      "page": "hash",
+      "viewport": "desktop",
+      "file": "hash-desktop.png",
+      "ok": true
+    },
+    {
+      "page": "reducao-de-danos",
+      "viewport": "desktop",
+      "file": "reducao-de-danos-desktop.png",
+      "ok": true
+    },
+    {
+      "page": "carrinho",
+      "viewport": "desktop",
+      "file": "carrinho-desktop.png",
+      "ok": true
+    },
+    {
+      "page": "sobre",
+      "viewport": "desktop",
+      "file": "sobre-desktop.png",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "viewport": "mobile",
+      "file": "home-mobile.png",
+      "ok": true
+    },
+    {
+      "page": "produtos",
+      "viewport": "mobile",
+      "file": "produtos-mobile.png",
+      "ok": true
+    },
+    {
+      "page": "flores",
+      "viewport": "mobile",
+      "file": "flores-mobile.png",
+      "ok": true
+    },
+    {
+      "page": "hash",
+      "viewport": "mobile",
+      "file": "hash-mobile.png",
+      "ok": true
+    },
+    {
+      "page": "reducao-de-danos",
+      "viewport": "mobile",
+      "file": "reducao-de-danos-mobile.png",
+      "ok": true
+    },
+    {
+      "page": "carrinho",
+      "viewport": "mobile",
+      "file": "carrinho-mobile.png",
+      "ok": true
+    },
+    {
+      "page": "sobre",
+      "viewport": "mobile",
+      "file": "sobre-mobile.png",
+      "ok": true
+    }
+  ]
+}
